@@ -1,0 +1,1 @@
+export const styleIconSvg = {width:25,height:25}
