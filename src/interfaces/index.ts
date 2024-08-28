@@ -1,8 +1,12 @@
 interface IFile{
+    id:string;
     name:string;
     isFolder:boolean;
     children?:IFile[]
-    content?:string
+    content?:string 
 }
 
 export default IFile;
+
+
+

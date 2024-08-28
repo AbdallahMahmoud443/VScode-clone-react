@@ -3,19 +3,33 @@ import IFile from "../interfaces";
 import RightArrawIcon from "./svg/RightArrawIcon";
 import ButtomArrowIcon from "./svg/ButtomArrowIcon";
 import RenderFileIcon from "./RenderFileIcon";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { setOpenedFile } from "../app/features/FileTreeSlice";
+import { isFileObjectExist } from "../utils/Functions";
 
 interface IProps {
   fileTree: IFile;
 }
-const RecursiveComponent = ({
-  fileTree: { name, isFolder, children },
-}: IProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
-  //* Handerl
+const RecursiveComponent = ({ fileTree }: IProps) => {
+  const { id, name, isFolder, children } = fileTree;
 
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+  //* Use File Tree reducer
+  const dispatch = useAppDispatch();
+  const openedFiles = useAppSelector((state) => state.fileTree.openFiles);
+
+  //* Handlers
   const toggle = () => {
     setIsOpen((prev) => !prev);
   };
+
+  //* Responsible For Opening Files
+  const onFileClicked = () => {
+    const exits = isFileObjectExist(openedFiles, id); // **  Check if File is Open Or Not
+    if (exits) return; // This means if file is open ,user can't open it again
+    dispatch(setOpenedFile([...openedFiles, fileTree]));
+  };
+
   return (
     <div className="ml-1">
       <div className="flex items-center my-2 space-x-1">
@@ -30,7 +44,7 @@ const RecursiveComponent = ({
             <span>{name}</span>
           </div>
         ) : (
-          <div className="flex items-center">
+          <div className="flex items-center" onClick={onFileClicked}>
             <span className="mr-2">
               <RenderFileIcon fileName={name} />
             </span>

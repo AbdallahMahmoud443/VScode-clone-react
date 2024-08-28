@@ -9,7 +9,6 @@ interface IProps {
 
 const RenderFileIcon = ({ fileName, isFolder, isOpen }: IProps) => {
   const extension = fileName.split(".").pop();
-  console.log(extension);
   // check extension and do object include this extension
   if (
     extension &&
