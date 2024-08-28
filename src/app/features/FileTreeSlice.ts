@@ -3,20 +3,21 @@ import IFile from "../../interfaces";
 
 
 interface IActiveFile {
+    activeFileId:String | null,
     fileName:string;
     fileContent:String | undefined;
 }
 
 interface initialState {
-    activeFileId:String | null,
+ 
     openFiles: IFile[];
     activeFile:IActiveFile;
 }
 
 const initialState:initialState = {
-  activeFileId:null,
   openFiles: [],
   activeFile: {
+    activeFileId:null,
     fileName: "",
     fileContent: "",
   },
@@ -33,12 +34,9 @@ const FileTreeSlice = createSlice({
     setActiveFile:(state,action:PayloadAction<IActiveFile>)=>{
       state.activeFile = action.payload
     },
-    setActiveFileId:(state,action:PayloadAction<string>)=>{
-      state.activeFileId = action.payload;
-    }
   },
 });
 
-export const {setOpenedFile,setActiveFile,setActiveFileId} = FileTreeSlice.actions // To Export Actions 
+export const {setOpenedFile,setActiveFile} = FileTreeSlice.actions // To Export Actions 
 
 export default FileTreeSlice.reducer;

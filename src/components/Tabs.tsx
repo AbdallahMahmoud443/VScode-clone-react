@@ -1,4 +1,4 @@
-import { setActiveFile, setActiveFileId } from "../app/features/FileTreeSlice";
+import { setActiveFile } from "../app/features/FileTreeSlice";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import IFile from "../interfaces";
 import RenderFileIcon from "./RenderFileIcon";
@@ -10,11 +10,10 @@ interface IProps {
 
 const Tabs = ({ file }: IProps) => {
   const dispatch = useAppDispatch();
-  const { activeFileId } = useAppSelector((state) => state.fileTree);
+  const { activeFileId } = useAppSelector((state) => state.fileTree.activeFile);
   const onTapClicked = () => {
     const { id, name, content } = file;
-    dispatch(setActiveFile({ fileName: name, fileContent: content }));
-    dispatch(setActiveFileId(id)); // **  Active File That Click On It
+    dispatch(setActiveFile({ fileName: name, fileContent: content ,activeFileId:id}));
   };
 
   return (
