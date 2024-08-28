@@ -5,7 +5,7 @@ import IFile from "../../interfaces";
 interface IActiveFile {
     activeFileId:String | null,
     fileName:string;
-    fileContent:String | undefined;
+    fileContent:string | undefined;
 }
 
 interface initialState {

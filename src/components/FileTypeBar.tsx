@@ -1,4 +1,5 @@
 import { useAppSelector } from "../app/hooks";
+import HighLightSyntaxCode from "./HighLightSyntaxCode";
 import Tabs from "./Tabs";
 
 interface IProps {}
@@ -16,7 +17,8 @@ const FileTypeBar = ({}: IProps) => {
           ))}
         </div>
       </div>
-      {activeFile.fileContent}
+      <HighLightSyntaxCode content={activeFile.fileContent}/>
+ 
     </div>
   );
 };
