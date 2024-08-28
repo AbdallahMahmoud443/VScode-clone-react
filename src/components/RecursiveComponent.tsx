@@ -4,7 +4,7 @@ import RightArrawIcon from "./svg/RightArrawIcon";
 import ButtomArrowIcon from "./svg/ButtomArrowIcon";
 import RenderFileIcon from "./RenderFileIcon";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { setOpenedFile } from "../app/features/FileTreeSlice";
+import { setActiveFileId, setOpenedFile } from "../app/features/FileTreeSlice";
 import { isFileObjectExist } from "../utils/Functions";
 
 interface IProps {
@@ -28,6 +28,7 @@ const RecursiveComponent = ({ fileTree }: IProps) => {
     const exits = isFileObjectExist(openedFiles, id); // **  Check if File is Open Or Not
     if (exits) return; // This means if file is open ,user can't open it again
     dispatch(setOpenedFile([...openedFiles, fileTree]));
+    dispatch(setActiveFileId(id)) // **  Active File That Click On It
   };
 
   return (

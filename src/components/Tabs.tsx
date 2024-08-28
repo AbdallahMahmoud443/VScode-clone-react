@@ -1,5 +1,5 @@
-import { setActiveFile } from "../app/features/FileTreeSlice";
-import { useAppDispatch } from "../app/hooks";
+import { setActiveFile, setActiveFileId } from "../app/features/FileTreeSlice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import IFile from "../interfaces";
 import RenderFileIcon from "./RenderFileIcon";
 import CloseIcon from "./svg/CloseIcon";
@@ -10,14 +10,20 @@ interface IProps {
 
 const Tabs = ({ file }: IProps) => {
   const dispatch = useAppDispatch();
+  const { activeFileId } = useAppSelector((state) => state.fileTree);
+  const onTapClicked = () => {
+    const { id, name, content } = file;
+    dispatch(setActiveFile({ fileName: name, fileContent: content }));
+    dispatch(setActiveFileId(id)); // **  Active File That Click On It
+  };
 
-  const onTapClicked = ()=>{
-    const {name,content} = file
-    dispatch(setActiveFile({fileName:name,fileContent:content}))
-  }
-  
   return (
-    <div className="flex items-center p-2" onClick={onTapClicked}>
+    <div
+      className={`flex items-center p-2 border-t-2 ${
+        file.id === activeFileId ? "border-[#cf6ccf]" : "border-transparent"
+      }`}
+      onClick={onTapClicked}
+    >
       <span>
         <RenderFileIcon fileName={file.name} />
       </span>
