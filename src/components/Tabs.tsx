@@ -1,4 +1,4 @@
-import { setActiveFile, setOpenedFile } from "../app/features/FileTreeSlice";
+import { setActiveFile, setOpenedFile, setTabIdToRemove } from "../app/features/FileTreeSlice";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import IFile from "../interfaces";
 import RenderFileIcon from "./RenderFileIcon";
@@ -50,6 +50,10 @@ const Tabs = ({ file }: IProps) => {
         file.id === activeFileId ? "border-[#cf6ccf]" : "border-transparent"
       }`}
       onClick={onTapClicked}
+      onContextMenu={e =>{
+        e.preventDefault()
+        dispatch(setTabIdToRemove(file.id)) // Get ID of Tab
+      }}
     >
       <span>
         <RenderFileIcon fileName={file.name} />
