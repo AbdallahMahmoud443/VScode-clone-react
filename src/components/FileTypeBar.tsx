@@ -6,6 +6,7 @@ import ContextMenu from "./ui/ContextMenu";
 interface IProps {}
 
 const FileTypeBar = ({}: IProps) => {
+  //** States
   const { openFiles } = useAppSelector((state) => state.fileTree);
   // Cooridinate on mouse in screen
   const [position, setPosition] = useState<{ x: number; y: number }>({
@@ -13,6 +14,10 @@ const FileTypeBar = ({}: IProps) => {
     y: 0,
   });
   const [showMenu, setShowMenu] = useState<boolean>(false);
+
+ 
+
+
   return (
     <div>
       <div
@@ -30,7 +35,7 @@ const FileTypeBar = ({}: IProps) => {
           ))}
          
         </div>
-        {showMenu && <ContextMenu position={position} />}
+        {showMenu && <ContextMenu position={position} showMenu={setShowMenu}/>}
       </div>
     </div>
   );
