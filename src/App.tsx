@@ -1,6 +1,7 @@
 import Preview from "./components/Preview";
 import RecursiveComponent from "./components/RecursiveComponent";
 import ResizablePanel from "./components/ResizablePanel";
+
 import { fileTree } from "./data/FileTree";
 
 function App() {
@@ -9,8 +10,9 @@ function App() {
       <div className="flex h-screen">
         <ResizablePanel
           Sidebar={
-            <div className="flex flex-start">
+            <div className="flex flex-col flex-start">
               <RecursiveComponent fileTree={fileTree} />
+  
             </div>
           }
           Main={<Preview />}

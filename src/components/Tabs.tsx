@@ -46,8 +46,9 @@ const Tabs = ({ file }: IProps) => {
   };
   return (
     <div
-      className={`flex items-center p-2 border-t-2 ${file.id === activeFileId ? "border-[#cf6ccf]" : "border-transparent"
-        }`}
+      className={`flex items-center p-2 border-t-2 ${
+        file.id === activeFileId ? "border-[#cf6ccf]" : "border-transparent"
+      }`}
       onClick={onTapClicked}
     >
       <span>
